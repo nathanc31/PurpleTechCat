@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PurpleTechCat – Contact</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body class="index-page">
+
+  <!-- Skip link -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="nav-container">
+     <a href="index.html" class="logo">
+  <img src="images/PurpleTechCatLogo.png" alt="PurpleTechCat Logo">
+</a>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="gdpr.html">GDPR</a>
+      </nav>
+      <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle dark or light mode">🌙</button>
+    </div>
+  </header>
+
+<div class="paw-track">
+  <span class="paw">🐾</span>
+  <span class="paw">🐾</span>
+  <span class="paw">🐾</span>
+  <span class="paw">🐾</span>
+  <span class="paw">🐾</span>
+</div>
+
+  <!-- Accessibility Toolbar -->
+  <div class="accessibility-toolbar" aria-label="Accessibility tools" role="region">
+    <button type="button" class="a11y-btn" id="a11y-font-inc">
+      A+
+      <span class="sr-only">Increase text size</span>
+    </button>
+    <button type="button" class="a11y-btn" id="a11y-font-dec">
+      A-
+      <span class="sr-only">Decrease text size</span>
+    </button>
+    <button type="button" class="a11y-btn" id="a11y-contrast-toggle">
+      ⚡
+      <span class="sr-only">Toggle high contrast mode</span>
+    </button>
+    <button type="button" class="a11y-btn" id="a11y-dyslexic-toggle">
+      Dys
+      <span class="sr-only">Toggle dyslexia-friendly font</span>
+    </button>
+    <button type="button" class="a11y-btn" id="a11y-reset">
+      ⟳
+      <span class="sr-only">Reset accessibility settings</span>
+    </button>
+  </div>
+
+  <main id="main-content">
+    <div class="content-with-cat">
+
+      <div class="content-left">
+
+        <section class="hero">
+          <h1>Contact Nathan</h1>
+          <p>Have a question, want to collaborate, or just want to say hello?</p>
+        </section>
+
+        <!-- GENERAL CONTACT FORM -->
+        <section class="card">
+          <form class="contact-form" action="https://formspree.io/f/mdavzybv" method="POST">
+
+  <input type="text" name="name" placeholder="Your Name" required>
+
+  <input type="email" name="email" placeholder="Your Email" required>
+
+  <select name="topic" required>
+    <option value="">Select a topic…</option>
+    <option value="safeguarding">Safeguarding concern</option>
+    <option value="lgbtq">LGBTQ+ chat or support</option>
+    <option value="events">Events or workshops</option>
+    <option value="other">Something else</option>
+  </select>
+
+  <textarea name="message" rows="5" placeholder="Your message…" required></textarea>
+
+  <button type="submit" class="primary-btn">Send Message</button>
+
+</form>
+</section>
+
+        <!-- LINKEDIN CONNECT -->
+        <section class="card">
+          <h2>Connect with Me</h2>
+          <p>You can also reach me on LinkedIn for professional enquiries.</p>
+
+          <a href="https://www.linkedin.com/in/nathan-c-727a413a7"
+             class="primary-btn"
+             target="_blank">
+             Connect with Nathan on LinkedIn
+          </a>
+        </section>
+
+      </div>
+
+      <!-- RIGHT SIDE CAT -->
+      <div class="cat-right">
+        <img src="images/SupportDeskCat.png" alt="Support Desk Cat">
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>© PurpleTechCat</p>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,186 @@
+<main id="main-content">
+
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PurpleTechCat – Home</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<header class="site-header">
+    <div class="nav-container">
+     <a href="index.html" class="logo">
+  <img src="images/PurpleTechCatLogo.png" alt="PurpleTechCat Logo">
+</a>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="gdpr.html">GDPR</a>
+      </nav>
+      <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle dark or light mode">🌙</button>
+    </div>
+  </header>
+
+<div class="paw-track">
+  <span class="paw">🐾</span>
+  <span class="paw">🐾</span>
+  <span class="paw">🐾</span>
+  <span class="paw">🐾</span>
+  <span class="paw">🐾</span>
+</div>
+
+  <!-- Accessibility Toolbar -->
+  <div class="accessibility-toolbar" aria-label="Accessibility tools" role="region">
+    <button type="button" class="a11y-btn" id="a11y-font-inc">
+      A+
+      <span class="sr-only">Increase text size</span>
+    </button>
+    <button type="button" class="a11y-btn" id="a11y-font-dec">
+      A-
+      <span class="sr-only">Decrease text size</span>
+    </button>
+    <button type="button" class="a11y-btn" id="a11y-contrast-toggle">
+      ⚡
+      <span class="sr-only">Toggle high contrast mode</span>
+    </button>
+    <button type="button" class="a11y-btn" id="a11y-dyslexic-toggle">
+      Dys
+      <span class="sr-only">Toggle dyslexia-friendly font</span>
+    </button>
+    <button type="button" class="a11y-btn" id="a11y-reset">
+      ⟳
+      <span class="sr-only">Reset accessibility settings</span>
+    </button>
+  </div>
+
+  <!-- TWO-COLUMN LAYOUT -->
+  <div class="content-with-cat">
+
+    <!-- LEFT COLUMN -->
+    <div class="content-left">
+
+      <section class="hero">
+        <h1 class="typing">Welcome to PurpleTechCat</h1>
+        <p>Helping the L25 community with free, accessible and stress‑free IT support.</p>
+      </section>
+
+      <section class="card" aria-label="IT support services">
+        <div class="service-card"><h3>🖥️ Hardware</h3><p>I help fix and set up computers, laptops and devices.</p></div>
+        <div class="service-card"><h3>💻 Software</h3><p>I support apps and programs and help solve problems.</p></div>
+        <div class="service-card"><h3>🌐 Networking</h3><p>I make sure devices connect to the internet safely.</p></div>
+        <div class="service-card"><h3>🔒 Security</h3><p>I help keep devices and accounts safe from risks.</p></div>
+      </section>
+
+      <section class="card" aria-live="polite">
+        <div id="statusBox"><span id="statusText">Checking status...</span></div>
+      </section>
+
+    </div>
+
+    <!-- RIGHT COLUMN -->
+    <div class="cat-right">
+      <img src="images/HappyITCat.png" alt="Happy IT Cat">
+    </div>
+
+  </div> <!-- END TWO-COLUMN LAYOUT -->
+
+
+  <!-- ROW 1: BOOK IT SUPPORT -->
+  <section class="card">
+    <div class="book-title">
+      <h2>🌈 Ready for Some Tech Help?</h2>
+      <p>Choose a time and I’ll guide you through it.</p>
+    </div>
+
+    <div class="booking-frame">
+      <link href="https://calendar.google.com/calendar/scheduling-button-script.css" rel="stylesheet">
+      <script src="https://calendar.google.com/calendar/scheduling-button-script.js" async></script>
+      <script>
+        (function() {
+          var target = document.currentScript;
+          window.addEventListener('load', function() {
+            calendar.schedulingButton.load({
+              url: 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ1Vgl9g2jaRL83QUdQ8HwgLPEZI0bfZwefRbj59JMho2mUd840d69fUmgsqsMQSJpaM_ph-lG-i?gv=true',
+              color: '#8E24AA',
+              label: "Book IT Support",
+              target,
+            });
+          });
+        })();
+      </script>
+    </div>
+  </section>
+
+  <!-- ROW 2: FAQ -->
+  <section class="card faq-card">
+    <h2>Frequently Asked Questions</h2>
+    <button id="faqBtn" class="faq-button">Open FAQ</button>
+  </section>
+
+  <!-- FAQ Modal -->
+<div id="faqModal" class="faq-modal" aria-hidden="true">
+  <div class="faq-content" role="dialog" aria-labelledby="faqTitle">
+    <button class="faq-close" id="faqClose" aria-label="Close FAQ">×</button>
+
+    <h2 id="faqTitle">PurpleTechCat – FAQ</h2>
+
+    <div class="faq-item">
+      <h3>What is PurpleTechCat?</h3>
+      <p>PurpleTechCat is my personal project where I offer free, friendly IT help for the L25 community. I explain things in simple language and help make technology less stressful.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3>What can you help with?</h3>
+      <p>I can help with slow devices, Wi‑Fi issues, email problems, passwords, new device setup, online safety, error messages, file organisation, gaming issues, and general tech worries.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3>Do you support gaming?</h3>
+      <p>Yes — I can help with console setup, connection issues, parental controls, online safety, and basic troubleshooting for PlayStation, Xbox, Nintendo and PC gaming.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3>Do you support primary school devices?</h3>
+      <p>Yes — I can help with school laptops, tablets, logins, homework platforms, safe browsing, and making sure children can use their devices confidently and safely.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3>Do you help with insured devices?</h3>
+      <p>Yes — I can check what’s wrong, help you gather proof for a claim, explain the issue in simple words, and help set up a replacement device. I don’t provide insurance myself.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3>What can’t you do?</h3>
+      <p>I don’t repair broken screens or hardware, replace parts, visit homes, contact insurance companies, remove parental controls, or work on business servers.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3>Is your help really free?</h3>
+      <p>Yes — PurpleTechCat is a free community service. I enjoy helping people feel more confident with technology.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3>When will you reply?</h3>
+      <p>I reply during my support hours: Tue–Thu 6pm–10pm, Sat–Sun 7am–10am. If you message outside these times, you’ll see “Offline – I will reply during my support hours.”</p>
+    </div>
+
+    <div class="faq-item">
+      <h3>How do I book support?</h3>
+      <p>Use the booking button on the Home Page to choose a time that works for you. All support is online.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3>Is my information safe?</h3>
+      <p>Yes — I only ask for the details I need to help you. I don’t store or share your information.</p>
+    </div>
+
+  </div>
+</div>
+
+</script>
+
+<footer class="site-footer"><p>© PurpleTechCat</p></footer>
+  <script src="js/main.js"></script>
+</body>
+</html>
