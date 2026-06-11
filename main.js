@@ -11,43 +11,6 @@ if (accBtn && accPanel) {
 }
 
 // ---------------------------------------------
-// ACCESSIBILITY MODES
-// ---------------------------------------------
-function toggleMode(mode) {
-  const body = document.body;
-  const modes = ['high-contrast', 'dyslexia-font', 'easy-read', 'reduce-motion'];
-
-  if (modes.includes(mode)) {
-    body.classList.toggle(mode);
-  }
-}
-
-// ---------------------------------------------
-// COOKIE POPUP
-// ---------------------------------------------
-const cookiePopup = document.getElementById('cookie-popup');
-const cookieAccept = document.getElementById('cookie-accept');
-const cookieReject = document.getElementById('cookie-reject');
-
-if (cookiePopup && cookieAccept && cookieReject) {
-  const consent = localStorage.getItem('ptc-cookie-consent');
-
-  if (!consent) {
-    cookiePopup.classList.remove('hidden');
-  }
-
-  cookieAccept.addEventListener('click', () => {
-    localStorage.setItem('ptc-cookie-consent', 'accepted');
-    cookiePopup.classList.add('hidden');
-  });
-
-  cookieReject.addEventListener('click', () => {
-    localStorage.setItem('ptc-cookie-consent', 'rejected');
-    cookiePopup.classList.add('hidden');
-  });
-}
-
-// ---------------------------------------------
 // THEME SYSTEM (persistent across pages)
 // ---------------------------------------------
 const body = document.body;
@@ -57,38 +20,41 @@ const savedTheme = localStorage.getItem("theme");
 
 if (savedTheme === "light") {
   body.classList.add("theme-light");
-  themeToggle.textContent = "☀️";
+  if (themeToggle) themeToggle.textContent = "☀️";
 } else {
   body.classList.add("theme-dark");
-  themeToggle.textContent = "🌙";
+  if (themeToggle) themeToggle.textContent = "🌙";
 }
 
-themeToggle.addEventListener("click", () => {
-  const isLight = body.classList.contains("theme-light");
+if (themeToggle) {
+  themeToggle.addEventListener("click", () => {
+    const isLight = body.classList.contains("theme-light");
 
-  if (isLight) {
-    body.classList.remove("theme-light");
-    body.classList.add("theme-dark");
-    themeToggle.textContent = "🌙";
-    localStorage.setItem("theme", "dark");
-  } else {
-    body.classList.remove("theme-dark");
-    body.classList.add("theme-light");
-    themeToggle.textContent = "☀️";
-    localStorage.setItem("theme", "light");
-  }
-});
+    if (isLight) {
+      body.classList.remove("theme-light");
+      body.classList.add("theme-dark");
+      themeToggle.textContent = "🌙";
+      localStorage.setItem("theme", "dark");
+    } else {
+      body.classList.remove("theme-dark");
+      body.classList.add("theme-light");
+      themeToggle.textContent = "☀️";
+      localStorage.setItem("theme", "light");
+    }
+  });
+}
 
 // ---------------------------------------------
-// LIVE STATUS SYSTEM
+// LIVE STATUS SYSTEM (only runs if exists)
 // ---------------------------------------------
 function updateStatus() {
+  const statusText = document.getElementById("statusText");
+  if (!statusText) return;
+
   const now = new Date();
   const day = now.getDay();
   const hour = now.getHours();
   const minute = now.getMinutes();
-
-  const statusText = document.getElementById("statusText");
 
   const schedule = {
     1: [],
@@ -100,7 +66,7 @@ function updateStatus() {
     0: [[7, 0, 10, 0]]
   };
 
-  const todaySlots = schedule[day];
+  const todaySlots = schedule[day] || [];
   let isOpen = false;
 
   for (const slot of todaySlots) {
@@ -120,7 +86,8 @@ function updateStatus() {
     statusText.classList.remove("status-closed");
     statusText.classList.add("status-open");
   } else {
-    statusText.textContent = "Offline – I will reply during my support hours (Tue–Thu 6pm–10pm, Sat–Sun 7am–10am).";
+    statusText.textContent =
+      "Offline – I will reply during my support hours (Tue–Thu 6pm–10pm, Sat–Sun 7am–10am).";
     statusText.classList.remove("status-open");
     statusText.classList.add("status-closed");
   }
@@ -157,13 +124,11 @@ setInterval(updateStatus, 60000);
 
   btnFontInc?.addEventListener('click', () => {
     if (html.classList.contains('font-large')) setFontSize('font-xlarge');
-    else if (html.classList.contains('font-xlarge')) setFontSize('font-xlarge');
     else setFontSize('font-large');
   });
 
   btnFontDec?.addEventListener('click', () => {
     if (html.classList.contains('font-xlarge')) setFontSize('font-large');
-    else if (html.classList.contains('font-large')) setFontSize('font-small');
     else setFontSize('font-small');
   });
 
@@ -186,13 +151,15 @@ setInterval(updateStatus, 60000);
 })();
 
 // ---------------------------------------------
-// AUTO‑HIGHLIGHT ACTIVE NAV LINK
+// AUTO-HIGHLIGHT ACTIVE NAV LINK
 // ---------------------------------------------
 const currentPage = window.location.pathname.split("/").pop();
 
 document.querySelectorAll("nav a").forEach(link => {
   const linkPage = link.getAttribute("href");
-  if (linkPage === currentPage) link.classList.add("active");
+  if (linkPage === currentPage) {
+    link.classList.add("active");
+  }
 });
 
 // ---------------------------------------------
