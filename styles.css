@@ -12,7 +12,7 @@
   --font-main: system-ui, -apple-system, "Segoe UI", sans-serif;
 }
 
-/* Light theme overrides */
+/* Light theme */
 .theme-light {
   --bg-page: #f5f5ff;
   --bg-card: rgba(255,255,255,0.85);
@@ -21,9 +21,6 @@
   --accent-soft: rgba(122, 76, 255, 0.2);
   --border-subtle: rgba(0,0,0,0.1);
 }
-
-/* Dark theme */
-.theme-dark {}
 
 /* =========================================================
    BASE
@@ -95,13 +92,11 @@ nav a.active {
   width: 320px;
 }
 
-/* Mobile layout */
 @media (max-width: 900px) {
   .content-with-cat {
     flex-direction: column;
     text-align: center;
   }
-
   .cat-right img {
     width: 240px;
   }
@@ -121,25 +116,8 @@ nav a.active {
 }
 
 /* =========================================================
-   CONTACT FORM
+   BUTTONS
    ========================================================= */
-.contact-form {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.contact-form input,
-.contact-form textarea,
-.contact-form select {
-  padding: 0.8rem;
-  border-radius: 0.6rem;
-  border: 1px solid var(--border-subtle);
-  background: var(--bg-card);
-  color: var(--text-main);
-}
-
-/* Purple button style (shared) */
 .purple-btn,
 .primary-btn {
   background: linear-gradient(135deg, #b38cff, #8f5fff);
@@ -160,20 +138,9 @@ nav a.active {
   box-shadow: 0 4px 12px rgba(179, 140, 255, 0.4);
 }
 
-}
-
 /* =========================================================
    ACCESSIBILITY
    ========================================================= */
-.skip-link {
-  position: absolute;
-  left: -999px;
-}
-
-.skip-link:focus {
-  left: 10px;
-}
-
 .accessibility-toolbar {
   position: fixed;
   right: 10px;
@@ -197,12 +164,12 @@ nav a.active {
   background: var(--accent-soft);
 }
 
-/* Font size accessibility */
+/* Font size */
 .font-small { font-size: 0.9rem; }
 .font-large { font-size: 1.15rem; }
 .font-xlarge { font-size: 1.3rem; }
 
-/* High contrast mode */
+/* High contrast */
 .high-contrast {
   --bg-page: #000;
   --bg-card: #000;
@@ -212,33 +179,9 @@ nav a.active {
   --border-subtle: #fff;
 }
 
-/* Dyslexia-friendly font */
+/* Dyslexia font */
 .dyslexic-font {
   font-family: "OpenDyslexic", Arial, sans-serif;
-}
-
-/* =========================================================
-   FAQ MODAL
-   ========================================================= */
-.faq-modal {
-  display: none;
-}
-
-.faq-modal.visible {
-  display: block;
-}
-
-/* =========================================================
-   PROFILE PHOTO
-   ========================================================= */
-.bio-photo {
-  width: 160px;
-  height: 160px;
-  border-radius: 50%;
-  object-fit: cover;
-  display: block;
-  margin: 0 auto 1rem;
-  border: 3px solid var(--accent);
 }
 
 /* =========================================================
@@ -266,6 +209,54 @@ nav a.active {
   0%   { transform: translateY(0); opacity: 0.3; }
   50%  { transform: translateY(-6px); opacity: 1; }
   100% { transform: translateY(0); opacity: 0.3; }
+}
+
+/* =========================================================
+   FAQ MODAL
+   ========================================================= */
+.faq-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(4px);
+  z-index: 9999;
+  padding: 2rem;
+}
+
+.faq-modal.visible {
+  display: block;
+}
+
+.faq-content {
+  background: var(--bg-card);
+  padding: 2rem;
+  max-width: 700px;
+  margin: auto;
+  border-radius: 1rem;
+  border: 1px solid var(--border-subtle);
+}
+
+.faq-close {
+  background: none;
+  border: none;
+  color: var(--text-main);
+  font-size: 2rem;
+  cursor: pointer;
+  float: right;
+}
+
+/* =========================================================
+   PROFILE PHOTO
+   ========================================================= */
+.bio-photo {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  margin: 0 auto 1rem;
+  border: 3px solid var(--accent);
 }
 
 /* =========================================================
