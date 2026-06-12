@@ -139,13 +139,27 @@ nav a.active {
   color: var(--text-main);
 }
 
+/* Purple button style (shared) */
+.purple-btn,
 .primary-btn {
-  background: var(--accent);
-  padding: 0.8rem 1.5rem;
+  background: linear-gradient(135deg, #b38cff, #8f5fff);
+  color: #fff;
+  padding: 0.9rem 1.6rem;
   border-radius: 999px;
   border: none;
   cursor: pointer;
-  color: #fff;
+  font-weight: bold;
+  text-decoration: none;
+  display: inline-block;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.purple-btn:hover,
+.primary-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(179, 140, 255, 0.4);
+}
+
 }
 
 /* =========================================================
