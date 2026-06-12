@@ -118,3 +118,12 @@ if (closeFAQ && faqModal) {
     faqModal.classList.remove("visible");
   });
 }
+const form = document.getElementById("contactForm");
+
+if (form) {
+  form.addEventListener("submit", function () {
+    setTimeout(() => {
+      window.location.href = "https://nathanc31.github.io/PurpleTechCat/thankyou.html";
+    }, 1200);
+  });
+}
