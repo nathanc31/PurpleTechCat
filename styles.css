@@ -18,6 +18,7 @@
   --bg-card: rgba(255,255,255,0.85);
   --text-main: #1a1a1a;
   --accent: #7a4cff;
+  --accent-soft: rgba(122, 76, 255, 0.2);
   --border-subtle: rgba(0,0,0,0.1);
 }
 
@@ -170,6 +171,72 @@ nav a.active {
   gap: 0.5rem;
 }
 
+.a11y-btn {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  padding: 0.4rem 0.6rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  color: var(--text-main);
+  font-weight: bold;
+}
+
+.a11y-btn:hover {
+  background: var(--accent-soft);
+}
+
+/* Font size accessibility */
+.font-small {
+  font-size: 0.9rem;
+}
+
+.font-large {
+  font-size: 1.15rem;
+}
+
+.font-xlarge {
+  font-size: 1.3rem;
+}
+
+/* High contrast mode */
+.high-contrast {
+  --bg-page: #000;
+  --bg-card: #000;
+  --text-main: #fff;
+  --accent: #ffea00;
+  --accent-soft: rgba(255, 234, 0, 0.2);
+  --border-subtle: #fff;
+}
+
+/* Dyslexia-friendly font */
+.dyslexic-font {
+  font-family: "OpenDyslexic", Arial, sans-serif;
+}
+
+/* =========================================================
+   FAQ MODAL
+   ========================================================= */
+.faq-modal {
+  display: none;
+}
+
+.faq-modal.visible {
+  display: block;
+}
+
+/* =========================================================
+   PROFILE PHOTO
+   ========================================================= */
+.bio-photo {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  margin: 0 auto 1rem;
+  border: 3px solid var(--accent);
+}
+
 /* =========================================================
    FOOTER
    ========================================================= */
@@ -190,20 +257,4 @@ nav a.active {
     opacity: 1;
     transform: translateY(0);
   }
-}
-.faq-modal {
-  display: none;
-}
-
-.faq-modal.visible {
-  display: block;
-}
-.bio-photo {
-  width: 160px;          /* adjust size */
-  height: 160px;
-  border-radius: 50%;    /* makes it circular */
-  object-fit: cover;     /* prevents stretching */
-  display: block;
-  margin: 0 auto 1rem;   /* centres the image */
-  border: 3px solid var(--accent); /* optional nice border */
 }
