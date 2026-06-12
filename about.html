@@ -8,11 +8,12 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="index-page">
+<body>
 
   <!-- Skip link -->
   <a href="#main-content" class="skip-link">Skip to main content</a>
 
+  <!-- HEADER -->
   <header class="site-header">
     <div class="nav-container">
       <a href="index.html" class="logo">
@@ -21,7 +22,7 @@
 
       <nav>
         <a href="index.html">Home</a>
-        <a href="about.html">About</a>
+        <a href="about.html" class="active">About</a>
         <a href="contact.html">Contact</a>
         <a href="gdpr.html">GDPR</a>
       </nav>
@@ -30,6 +31,7 @@
     </div>
   </header>
 
+  <!-- PAW TRACK -->
   <div class="paw-track">
     <span class="paw">🐾</span>
     <span class="paw">🐾</span>
@@ -38,7 +40,7 @@
     <span class="paw">🐾</span>
   </div>
 
-  <!-- Accessibility Toolbar -->
+  <!-- ACCESSIBILITY TOOLBAR -->
   <div class="accessibility-toolbar" aria-label="Accessibility tools" role="region">
     <button type="button" class="a11y-btn" id="a11y-font-inc">A+</button>
     <button type="button" class="a11y-btn" id="a11y-font-dec">A-</button>
@@ -47,11 +49,14 @@
     <button type="button" class="a11y-btn" id="a11y-reset">⟳</button>
   </div>
 
+  <!-- MAIN CONTENT -->
   <main id="main-content">
+
     <div class="content-with-cat">
 
-      <!-- LEFT -->
+      <!-- LEFT COLUMN -->
       <div class="content-left">
+
         <section class="hero">
           <h1 class="typing">About Nathan</h1>
           <p>This is me — the person behind PurpleTechCat.</p>
@@ -70,16 +75,19 @@
 
           <p>PurpleTechCat brings together my IT skills, accessibility experience and community background to offer free, friendly and local tech support.</p>
         </section>
+
       </div>
 
-      <!-- RIGHT -->
+      <!-- RIGHT COLUMN -->
       <div class="cat-right">
         <img src="focusedcodingcat.png" alt="Focused Coding Cat">
       </div>
 
     </div>
+
   </main>
 
+  <!-- FOOTER -->
   <footer class="site-footer">
     <p>© PurpleTechCat</p>
   </footer>
