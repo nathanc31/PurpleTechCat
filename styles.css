@@ -191,3 +191,10 @@ nav a.active {
     transform: translateY(0);
   }
 }
+.faq-modal {
+  display: none;
+}
+
+.faq-modal.visible {
+  display: block;
+}
