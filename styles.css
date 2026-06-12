@@ -1,3 +1,6 @@
+/* =========================================================
+   ROOT VARIABLES
+   ========================================================= */
 :root {
   --bg-page: #0b0b12;
   --bg-card: rgba(15, 15, 25, 0.9);
@@ -9,15 +12,28 @@
   --font-main: system-ui, -apple-system, "Segoe UI", sans-serif;
 }
 
-/* ------------------------------------- */
-/* BASE */
-/* ------------------------------------- */
+/* Light theme overrides */
+.theme-light {
+  --bg-page: #f5f5ff;
+  --bg-card: rgba(255,255,255,0.85);
+  --text-main: #1a1a1a;
+  --accent: #7a4cff;
+  --border-subtle: rgba(0,0,0,0.1);
+}
 
+/* Dark theme (explicit for clarity) */
+.theme-dark {
+  /* Uses default root variables */
+}
+
+/* =========================================================
+   BASE
+   ========================================================= */
 body {
   margin: 0;
   font-family: var(--font-main);
   color: var(--text-main);
-  background-color: var(--bg-page);
+  background: var(--bg-page);
   font-weight: bold;
   position: relative;
 }
@@ -31,22 +47,9 @@ body::before {
   z-index: -1;
 }
 
-/* ------------------------------------- */
-/* THEME */
-/* ------------------------------------- */
-
-.theme-light {
-  --bg-page: #f5f5ff;
-  --bg-card: rgba(255,255,255,0.85);
-  --text-main: #1a1a1a;
-  --accent: #7a4cff;
-  --border-subtle: rgba(0,0,0,0.1);
-}
-
-/* ------------------------------------- */
-/* HEADER */
-/* ------------------------------------- */
-
+/* =========================================================
+   HEADER
+   ========================================================= */
 .site-header {
   padding: 1rem 0;
   backdrop-filter: blur(10px);
@@ -71,16 +74,17 @@ nav a {
   text-decoration: none;
   padding: 0.4rem 0.8rem;
   border-radius: 999px;
+  transition: background 0.2s ease;
 }
 
-nav a:hover {
+nav a:hover,
+nav a.active {
   background: var(--accent-soft);
 }
 
-/* ------------------------------------- */
-/* LAYOUT */
-/* ------------------------------------- */
-
+/* =========================================================
+   LAYOUT
+   ========================================================= */
 .content-with-cat {
   display: flex;
   gap: 2rem;
@@ -92,7 +96,7 @@ nav a:hover {
   width: 320px;
 }
 
-/* Mobile */
+/* Mobile layout */
 @media (max-width: 900px) {
   .content-with-cat {
     flex-direction: column;
@@ -104,10 +108,9 @@ nav a:hover {
   }
 }
 
-/* ------------------------------------- */
-/* CARDS */
-/* ------------------------------------- */
-
+/* =========================================================
+   CARDS
+   ========================================================= */
 .card {
   background: var(--bg-card);
   padding: 1.5rem;
@@ -115,12 +118,12 @@ nav a:hover {
   border: 1px solid var(--border-subtle);
   margin: 1rem auto;
   max-width: 650px;
+  animation: fadeInUp 0.6s ease;
 }
 
-/* ------------------------------------- */
-/* CONTACT FORM */
-/* ------------------------------------- */
-
+/* =========================================================
+   CONTACT FORM
+   ========================================================= */
 .contact-form {
   display: flex;
   flex-direction: column;
@@ -137,19 +140,18 @@ nav a:hover {
   color: var(--text-main);
 }
 
-/* Button */
 .primary-btn {
   background: var(--accent);
   padding: 0.8rem 1.5rem;
   border-radius: 999px;
   border: none;
   cursor: pointer;
+  color: #fff;
 }
 
-/* ------------------------------------- */
-/* ACCESSIBILITY */
-/* ------------------------------------- */
-
+/* =========================================================
+   ACCESSIBILITY
+   ========================================================= */
 .skip-link {
   position: absolute;
   left: -999px;
@@ -163,26 +165,29 @@ nav a:hover {
   position: fixed;
   right: 10px;
   top: 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
-/* ------------------------------------- */
-/* FOOTER */
-/* ------------------------------------- */
-
+/* =========================================================
+   FOOTER
+   ========================================================= */
 .site-footer {
   text-align: center;
   padding: 2rem;
 }
 
-/* ------------------------------------- */
-/* ANIMATIONS */
-/* ------------------------------------- */
-
+/* =========================================================
+   ANIMATIONS
+   ========================================================= */
 @keyframes fadeInUp {
-  from {opacity:0; transform: translateY(20px);}
-  to {opacity:1; transform: translateY(0);}
-}
-
-.card {
-  animation: fadeInUp 0.6s ease;
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
