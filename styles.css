@@ -198,3 +198,12 @@ nav a.active {
 .faq-modal.visible {
   display: block;
 }
+.bio-photo {
+  width: 160px;          /* adjust size */
+  height: 160px;
+  border-radius: 50%;    /* makes it circular */
+  object-fit: cover;     /* prevents stretching */
+  display: block;
+  margin: 0 auto 1rem;   /* centres the image */
+  border: 3px solid var(--accent); /* optional nice border */
+}
