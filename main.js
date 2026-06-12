@@ -1,60 +1,34 @@
-// ---------------------------------------------
-// ACCESSIBILITY PANEL TOGGLE
-// ---------------------------------------------
-const accBtn = document.getElementById('accessibility-btn');
-const accPanel = document.getElementById('accessibility-panel');
+// =========================================================
+// UTILITY HELPERS
+// =========================================================
+const $ = (sel) => document.querySelector(sel);
+const $$ = (sel) => document.querySelectorAll(sel);
 
-if (accBtn && accPanel) {
-  accBtn.addEventListener('click', () => {
-    accPanel.classList.toggle('hidden');
+// =========================================================
+// THEME SYSTEM (persistent)
+// =========================================================
+(() => {
+  const themeToggle = $("#theme-toggle");
+  const saved = localStorage.getItem("theme");
+  const isLight = saved === "light";
+
+  document.body.classList.add(isLight ? "theme-light" : "theme-dark");
+  if (themeToggle) themeToggle.textContent = isLight ? "☀️" : "🌙";
+
+  themeToggle?.addEventListener("click", () => {
+    const light = document.body.classList.toggle("theme-light");
+    document.body.classList.toggle("theme-dark", !light);
+    themeToggle.textContent = light ? "☀️" : "🌙";
+    localStorage.setItem("theme", light ? "light" : "dark");
   });
-}
+})();
 
-// ---------------------------------------------
-// THEME SYSTEM (persistent across pages)
-// ---------------------------------------------
-const body = document.body;
-const themeToggle = document.getElementById("theme-toggle");
-
-const savedTheme = localStorage.getItem("theme");
-
-if (savedTheme === "light") {
-  body.classList.add("theme-light");
-  if (themeToggle) themeToggle.textContent = "☀️";
-} else {
-  body.classList.add("theme-dark");
-  if (themeToggle) themeToggle.textContent = "🌙";
-}
-
-if (themeToggle) {
-  themeToggle.addEventListener("click", () => {
-    const isLight = body.classList.contains("theme-light");
-
-    if (isLight) {
-      body.classList.remove("theme-light");
-      body.classList.add("theme-dark");
-      themeToggle.textContent = "🌙";
-      localStorage.setItem("theme", "dark");
-    } else {
-      body.classList.remove("theme-dark");
-      body.classList.add("theme-light");
-      themeToggle.textContent = "☀️";
-      localStorage.setItem("theme", "light");
-    }
-  });
-}
-
-// ---------------------------------------------
-// LIVE STATUS SYSTEM (only runs if exists)
-// ---------------------------------------------
-function updateStatus() {
-  const statusText = document.getElementById("statusText");
+// =========================================================
+// LIVE STATUS SYSTEM
+// =========================================================
+(() => {
+  const statusText = $("#statusText");
   if (!statusText) return;
-
-  const now = new Date();
-  const day = now.getDay();
-  const hour = now.getHours();
-  const minute = now.getMinutes();
 
   const schedule = {
     1: [],
@@ -66,122 +40,126 @@ function updateStatus() {
     0: [[7, 0, 10, 0]]
   };
 
-  const todaySlots = schedule[day] || [];
-  let isOpen = false;
+  function updateStatus() {
+    const now = new Date();
+    const day = now.getDay();
+    const mins = now.getHours() * 60 + now.getMinutes();
+    const slots = schedule[day] || [];
 
-  for (const slot of todaySlots) {
-    const [startH, startM, endH, endM] = slot;
-    const start = startH * 60 + startM;
-    const end = endH * 60 + endM;
-    const nowMinutes = hour * 60 + minute;
+    const open = slots.some(([sh, sm, eh, em]) => {
+      const start = sh * 60 + sm;
+      const end = eh * 60 + em;
+      return mins >= start && mins < end;
+    });
 
-    if (nowMinutes >= start && nowMinutes < end) {
-      isOpen = true;
-      break;
+    if (open) {
+      statusText.textContent = "Online – I am available now.";
+      statusText.classList.add("status-open");
+      statusText.classList.remove("status-closed");
+    } else {
+      statusText.textContent =
+        "Offline – I will reply during my support hours (Tue–Thu 6pm–10pm, Sat–Sun 7am–10am).";
+      statusText.classList.add("status-closed");
+      statusText.classList.remove("status-open");
     }
   }
 
-  if (isOpen) {
-    statusText.textContent = "Online – I am available now.";
-    statusText.classList.remove("status-closed");
-    statusText.classList.add("status-open");
-  } else {
-    statusText.textContent =
-      "Offline – I will reply during my support hours (Tue–Thu 6pm–10pm, Sat–Sun 7am–10am).";
-    statusText.classList.remove("status-open");
-    statusText.classList.add("status-closed");
-  }
-}
+  updateStatus();
+  setInterval(updateStatus, 60000);
+})();
 
-updateStatus();
-setInterval(updateStatus, 60000);
-
-// ---------------------------------------------
+// =========================================================
 // ACCESSIBILITY TOOLS
-// ---------------------------------------------
-(function () {
+// =========================================================
+(() => {
   const html = document.documentElement;
+  const body = document.body;
 
-  const btnFontInc = document.getElementById('a11y-font-inc');
-  const btnFontDec = document.getElementById('a11y-font-dec');
-  const btnContrast = document.getElementById('a11y-contrast-toggle');
-  const btnDyslexic = document.getElementById('a11y-dyslexic-toggle');
-  const btnReset = document.getElementById('a11y-reset');
+  const btnFontInc = $("#a11y-font-inc");
+  const btnFontDec = $("#a11y-font-dec");
+  const btnContrast = $("#a11y-contrast-toggle");
+  const btnDyslexic = $("#a11y-dyslexic-toggle");
+  const btnReset = $("#a11y-reset");
 
-  const savedFont = localStorage.getItem('a11y-font');
-  const savedContrast = localStorage.getItem('a11y-contrast') === 'true';
-  const savedDyslexic = localStorage.getItem('a11y-dyslexic') === 'true';
+  // Restore saved settings
+  const savedFont = localStorage.getItem("a11y-font");
+  const savedContrast = localStorage.getItem("a11y-contrast") === "true";
+  const savedDys = localStorage.getItem("a11y-dyslexic") === "true";
 
   if (savedFont) html.classList.add(savedFont);
-  if (savedContrast) body.classList.add('high-contrast');
-  if (savedDyslexic) body.classList.add('dyslexic-font');
+  if (savedContrast) body.classList.add("high-contrast");
+  if (savedDys) body.classList.add("dyslexic-font");
 
-  function setFontSize(level) {
-    html.classList.remove('font-small', 'font-large', 'font-xlarge');
+  const setFont = (level) => {
+    html.classList.remove("font-small", "font-large", "font-xlarge");
     if (level) html.classList.add(level);
-    localStorage.setItem('a11y-font', level || '');
-  }
+    localStorage.setItem("a11y-font", level || "");
+  };
 
-  btnFontInc?.addEventListener('click', () => {
-    if (html.classList.contains('font-large')) setFontSize('font-xlarge');
-    else setFontSize('font-large');
+  btnFontInc?.addEventListener("click", () => {
+    if (html.classList.contains("font-large")) setFont("font-xlarge");
+    else setFont("font-large");
   });
 
-  btnFontDec?.addEventListener('click', () => {
-    if (html.classList.contains('font-xlarge')) setFontSize('font-large');
-    else setFontSize('font-small');
+  btnFontDec?.addEventListener("click", () => {
+    if (html.classList.contains("font-xlarge")) setFont("font-large");
+    else setFont("font-small");
   });
 
-  btnContrast?.addEventListener('click', () => {
-    const enabled = body.classList.toggle('high-contrast');
-    localStorage.setItem('a11y-contrast', enabled);
+  btnContrast?.addEventListener("click", () => {
+    const enabled = body.classList.toggle("high-contrast");
+    localStorage.setItem("a11y-contrast", enabled);
   });
 
-  btnDyslexic?.addEventListener('click', () => {
-    const enabled = body.classList.toggle('dyslexic-font');
-    localStorage.setItem('a11y-dyslexic', enabled);
+  btnDyslexic?.addEventListener("click", () => {
+    const enabled = body.classList.toggle("dyslexic-font");
+    localStorage.setItem("a11y-dyslexic", enabled);
   });
 
-  btnReset?.addEventListener('click', () => {
-    setFontSize('');
-    body.classList.remove('high-contrast', 'dyslexic-font');
-    localStorage.removeItem('a11y-contrast');
-    localStorage.removeItem('a11y-dyslexic');
+  btnReset?.addEventListener("click", () => {
+    setFont("");
+    body.classList.remove("high-contrast", "dyslexic-font");
+    localStorage.removeItem("a11y-contrast");
+    localStorage.removeItem("a11y-dyslexic");
   });
 })();
 
-// ---------------------------------------------
+// =========================================================
 // AUTO-HIGHLIGHT ACTIVE NAV LINK
-// ---------------------------------------------
-const currentPage = window.location.pathname.split("/").pop();
+// =========================================================
+(() => {
+  const current = window.location.pathname.split("/").pop();
+  $$("nav a").forEach((link) => {
+    if (link.getAttribute("href") === current) {
+      link.classList.add("active");
+    }
+  });
+})();
 
-document.querySelectorAll("nav a").forEach(link => {
-  const linkPage = link.getAttribute("href");
-  if (linkPage === currentPage) {
-    link.classList.add("active");
-  }
-});
-
-// ---------------------------------------------
+// =========================================================
 // FAQ MODAL
-// ---------------------------------------------
-const faqBtn = document.getElementById("faqBtn");
-const faqModal = document.getElementById("faqModal");
-const faqClose = document.getElementById("faqClose");
+// =========================================================
+(() => {
+  const modal = $("#faqModal");
+  const openBtn = $("#faqBtn");
+  const closeBtn = $("#faqClose");
 
-faqBtn?.addEventListener("click", () => {
-  faqModal.style.display = "block";
-  faqModal.setAttribute("aria-hidden", "false");
-});
+  if (!modal) return;
 
-faqClose?.addEventListener("click", () => {
-  faqModal.style.display = "none";
-  faqModal.setAttribute("aria-hidden", "true");
-});
+  const open = () => {
+    modal.classList.add("visible");
+    modal.setAttribute("aria-hidden", "false");
+  };
 
-window.addEventListener("click", (e) => {
-  if (e.target === faqModal) {
-    faqModal.style.display = "none";
-    faqModal.setAttribute("aria-hidden", "true");
-  }
-});
+  const close = () => {
+    modal.classList.remove("visible");
+    modal.setAttribute("aria-hidden", "true");
+  };
+
+  openBtn?.addEventListener("click", open);
+  closeBtn?.addEventListener("click", close);
+
+  window.addEventListener("click", (e) => {
+    if (e.target === modal) close();
+  });
+})();
